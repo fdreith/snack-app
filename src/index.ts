@@ -1,5 +1,6 @@
 // const express = require("express");
 import express from "express";
+import { timeStamp } from "console";
 const app = express();
 const port = 3000; // default port to listen
 
@@ -131,3 +132,71 @@ let snackBreak = function (food = "hot dog", quantity: number): void {
 };
 
 snackBreak("chips", 15);
+
+// String Literal Types
+
+interface lunch {
+  food: "tacos" | "hamburger" | "salad";
+}
+function eatLunch(lunch: lunch) {
+  return `Yum, ${lunch}`;
+}
+
+// eatLunch({food: "quesadilla"});
+eatLunch({ food: "tacos" });
+
+// Numeric Literal Types
+
+function lunchTime(): 11 | 12 | 13 | 14 {
+  return (Math.floor(Math.random() * (14 - 11) + 11) + 1) as 11 | 12 | 13 | 14;
+}
+
+// Boolean Literal Types
+
+interface Eaten {
+  isHungry: false;
+  ate: string;
+}
+
+interface HaveNotEaten {
+  isHungry: true;
+  ate: null;
+}
+
+type HaveOrHaveNotEaten = Eaten | HaveNotEaten;
+
+// Literal Narrowing
+
+let hamburger = "Hamburger with tomato jam";
+const tacos = "vegan tacos";
+
+function snackTime(time: number | string): string {
+  return `let's eat at ${time}`;
+}
+
+snackTime(11);
+snackTime("11");
+
+
+
+
+
+
+type WaitingForSnack = {
+  state: "hungry";
+};
+
+type AteSnacks = {
+  state: "not hungry";
+  snackStock: "full" | "low" | "medium";
+};
+
+type OutOfSnacks = {
+  state: "hungry" | "not hungry";
+  snackStock: "out";
+  purchase: String[];
+};
+
+type GoodSnackState = AteSnacks & OutOfSnacks;
+
+type BadSnackState = WaitingForSnack & OutOfSnacks;

@@ -80,14 +80,27 @@ function eatSnack(snack) {
 }
 eatSnack(chips);
 // => Chomp chomp, potato chips are tasty!
+// Named function with Typescript
 function eat(food, quantity) {
     for (var i = 0; i < quantity; i++) {
-        console.log("chomp, " + food);
+        console.log("CHOMP! mmm, " + food);
     }
 }
-eat(chips, 5);
-// => chomp! potato chips
-// => chomp! potato chips
-// => chomp! potato chips
-// => chomp! potato chips
-// => chomp! potato chips
+//Anonymous function with Typescript
+var eatMore = function (food, quantity) {
+    for (var i = 0; i < quantity; i++) {
+        console.log("CHOMP! mmm, " + food);
+    }
+};
+eat("potato chips", 5);
+var doritos = { name: "doritos" };
+var snackBreak = function (food, quantity) {
+    if (food === void 0) { food = "hot dog"; }
+    console.log("Tasty, " + food + "!");
+};
+snackBreak("chips", 15);
+// Numeric Literal Types
+function lunchTime() {
+    return (Math.floor(Math.random() * (14 - 11) + 11) + 1);
+}
+lunchTime();
