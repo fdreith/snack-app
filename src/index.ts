@@ -200,3 +200,10 @@ type OutOfSnacks = {
 type GoodSnackState = AteSnacks & OutOfSnacks;
 
 type BadSnackState = WaitingForSnack & OutOfSnacks;
+
+
+//Enums
+enum Snack {
+  popcorn,
+  cornNuts,
+}
