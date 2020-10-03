@@ -99,14 +99,14 @@ interface Snack {
 
 let chips = { name: "potato chips", quantity: 10, tasty: true };
 
-function eatSnack(snack: Snack) {
-  console.log(
-    `Chomp chomp, ${snack.name} ${snack.quantity > 1 ? "are" : "is"}
-    ${snack.tasty ? "tasty!" : "not so great.."}`
-  );
-}
+// function eatSnack(snack: Snack) {
+//   console.log(
+//     `Chomp chomp, ${snack.name} ${snack.quantity > 1 ? "are" : "is"}
+//     ${snack.tasty ? "tasty!" : "not so great.."}`
+//   );
+// }
 
-eatSnack(chips);
+// eatSnack(chips);
 // => Chomp chomp, potato chips are tasty!
 
 // Named function with Typescript
@@ -177,11 +177,6 @@ function snackTime(time: number | string): string {
 snackTime(11);
 snackTime("11");
 
-
-
-
-
-
 type WaitingForSnack = {
   state: "hungry";
 };
@@ -201,9 +196,95 @@ type GoodSnackState = AteSnacks & OutOfSnacks;
 
 type BadSnackState = WaitingForSnack & OutOfSnacks;
 
-
 //Enums
-enum Snack {
-  popcorn,
-  cornNuts,
+//Computed Numeric Enums
+// enum Snacks {
+//   Popcorn = cupPopcornCalories(),
+//   CornNuts = 124,
+//   Chips = Popcorn * 2,
+//   PotatoeChips = 152,
+// }
+
+// Snacks.Popcorn;
+// //=> 5
+
+// Snacks.Chips;
+// //=> 7
+
+// Numeric Enums
+enum Snacks {
+  Popcorn = 109,
+  CornNuts = 124,
+  Chips = 218,
+  PotatoeChips = 152,
 }
+
+Snacks.Popcorn;
+//=> 109
+
+//Computed Numeric Enums
+// enum Snacks {
+//   Popcorn = cupPopcornCalories(),
+//   CornNuts = 124,
+//   Chips = Popcorn * 2,
+//   PotatoeChips = 152,
+// }
+
+function cupPopcornCalories(): number {
+  return 106;
+}
+
+// String Enums
+// enum Snacks {
+//   Popcorn = "POPCORN",
+//   CornNuts = "CORN NUTS",
+//   Chips = "CHIPS",
+//   PotatoeChips = "POTATOE CHIPS",
+// }
+
+Snacks.Popcorn;
+//=> POPCORN
+
+Snacks["Popcorn"];
+//=> POPCORN
+
+// Heterogeneous Enums
+enum HungerState {
+  VeryHungry = 10,
+  Hungry = 5,
+  KindOfHungry = 2,
+  NotHungry = "NO",
+}
+
+//Generics
+
+function whatAmI<T>(thing: T, amount: number): string {
+  return `${amount.toString()} ${thing}s`;
+}
+
+whatAmI(1, 5)
+// => "5 1s"
+whatAmI("string", 20)
+// => "20 strings"
+
+
+
+
+
+function thingLength<T>(things: T[]): void {
+  console.log(things.length)
+}
+
+interface SnackTime<T, S> {
+  timeOfSnack: T,
+  snack: S
+}
+
+function ate<T, S>(time: T, snack: S): SnackTime<T, S>{
+  let snackTime: SnackTime<T, S> = {
+    timeOfSnack: time,
+    snack: snack,
+  };
+  return snackTime
+}
+
